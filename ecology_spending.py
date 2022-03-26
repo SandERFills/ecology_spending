@@ -1,6 +1,7 @@
 from math import sqrt,pow
 from plotly.graph_objs import Bar,Layout
 from plotly import offline
+
 alpha_of_city=[[ 1.19,1.34,1.72],
                 [1.09,1.11,1.52],
                 [1.25,1.00,1.63],
@@ -53,7 +54,9 @@ def form_for_one_spending(coef,pay_norm_obj,pay_over_obj):
     по формуле
     """
     try:
-        result=(coef*pow(((pay_norm_obj+pay_over_obj)/pay_over_obj),2))
+        summ=(pay_norm_obj+pay_over_obj)
+        div=(summ/pay_norm_obj) #<- по формуле нужно делить вот так , первоначально делил на pay_over_obj
+        result=((div**2)*coef)
     except ZeroDivisionError:
         return 0
     return result
